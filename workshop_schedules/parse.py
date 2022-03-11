@@ -5,6 +5,7 @@ from pprint import pprint
 import datetime, time
 from yaml import load
 
+from workshop_schedules import output
 from workshop_schedules.objects import Block
 
 try:
@@ -32,17 +33,10 @@ def parse_file(fn="program.yml"):
             if current_block.first_session.get("parallel", False):
                 while sessions and sessions[-1].get("parallel", False):
                     current_block.add_session(sessions.popleft())
-
-            pprint(
-                {
-                    "name": current_block.name,
-                    "sessions": current_block.session_count,
-                    "end": current_block.end,
-                    "start": current_block.start,
-                }
-            )
+            day["blocks"].append(current_block)
     return day
 
 
 if __name__ == "__main__":
-    parse_file()
+    day = parse_file()
+    output.render(day)

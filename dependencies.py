@@ -12,14 +12,18 @@ def setup_requires():
     ]
 
 
-install_requires = ['packaging', 'typer', 'rich',] + setup_requires()
+install_requires = [
+    'packaging',
+    'typer',
+    'rich',
+] + setup_requires()
 install_suggests = {
     #'package_name': 'description',
 }
 doc_requires = [
     'sphinx',
     'python-slugify',
-    'myst-nb>=0.14',
+    'myst-nb>=0.13.2',
     'sphinx-autoapi>=1.8',
 ] + install_requires
 ci_requires = [

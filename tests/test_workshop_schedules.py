@@ -1,23 +1,17 @@
 #!/usr/bin/env python
 
 """Tests for `workshop_schedules` package."""
-import pickle
-import numpy as np
-from functools import partial
-from tempfile import TemporaryFile
 
 from click.testing import CliRunner
 
 from workshop_schedules import cli
 
 
-
 def test_version():
+    import workshop_schedules
+
     assert workshop_schedules.__version__
 
-
-def test_import(timings_object):
-    from workshop_schedules import *
 
 def test_command_line_interface():
     """Test the CLI."""

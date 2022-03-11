@@ -12,7 +12,11 @@ def setup_requires():
     ]
 
 
-install_requires = ['packaging', 'typer', 'rich',] + setup_requires()
+install_requires = [
+    'packaging',
+    'typer',
+    'rich',
+] + setup_requires()
 install_suggests = {
     #'package_name': 'description',
 }

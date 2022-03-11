@@ -1,4 +1,3 @@
-
 from attr import define, field
 
 import datetime, time
@@ -12,9 +11,8 @@ class Slot:
     end: datetime.datetime
 
     @property
-    def duration(self)->datetime.timedelta:
+    def duration(self) -> datetime.timedelta:
         return self.end - self.start
-
 
 
 @define
@@ -38,24 +36,20 @@ class Block:
 
     @property
     def name(self):
-        return [
-            s.get("name", None) or s.get("description") for s in self._parallel_sessions
-        ]
+        return [s.get("name", None) or s.get("description") for s in self._parallel_sessions]
 
-    def add_session(self, session:dict) -> None:
+    def add_session(self, session: dict) -> None:
 
         slots = []
         start = self.start
         if 'pause' in session.keys():
-            slots = [Slot(start, start+duration_to_date(session["pause"]))]
+            slots = [Slot(start, start + duration_to_date(session["pause"]))]
         else:
             for talk in session['talks']:
                 end = start + duration_to_date(talk["duration"])
                 slots.append(Slot(start, end))
         if self.slots:
-            assert all(
-                s == p for s, p in zip(slots, self.slots)
-            ), "Slots must agree for parallel sessions"
+            assert all(s == p for s, p in zip(slots, self.slots)), "Slots must agree for parallel sessions"
         else:
             self.slots = slots
         self.end = self.slots[-1].end

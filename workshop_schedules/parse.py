@@ -13,22 +13,14 @@ except ImportError:
     from yaml import Loader, Dumper
 
 
-
-def parse_file(fn = "program.yml"):
+def parse_file(fn="program.yml"):
 
     with open(fn, "rt") as yml:
         data = load(yml, Loader=Loader)
 
-
-
-
-
-
     for day in data["days"]:
         start = time.strptime(day["start"], "%H:%M")
-        day["start"] = datetime.datetime.combine(
-            day["date"], datetime.time(start.tm_hour, start.tm_min)
-        )
+        day["start"] = datetime.datetime.combine(day["date"], datetime.time(start.tm_hour, start.tm_min))
         day["blocks"] = []
         sessions = collections.deque(day["sessions"])
 
@@ -49,6 +41,8 @@ def parse_file(fn = "program.yml"):
                     "start": current_block.start,
                 }
             )
+    return day
+
 
 if __name__ == "__main__":
     parse_file()

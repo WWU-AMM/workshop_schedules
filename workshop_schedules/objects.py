@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Optional, List
 
 from attr import define, field
 
@@ -11,7 +11,7 @@ from workshop_schedules.tools import duration_to_date
 class Slot:
     start: datetime.datetime
     end: datetime.datetime
-    talks: list[dict] = field(init=False, factory=list)
+    talks: List[dict] = field(init=False, factory=list)
     pause: Optional[dict] = field(init=False, factory=None)
 
     @property
@@ -21,8 +21,8 @@ class Slot:
 
 @define
 class Block:
-    _parallel_sessions: list[dict] = field(init=False, factory=list)
-    slots: list[Slot] = field(init=False, factory=list)
+    _parallel_sessions: List[dict] = field(init=False, factory=list)
+    slots: List[Slot] = field(init=False, factory=list)
     start: datetime.datetime
     end: datetime.datetime = field()
 

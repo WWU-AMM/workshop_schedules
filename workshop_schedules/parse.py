@@ -16,7 +16,7 @@ except ImportError:
     from yaml import Loader, Dumper
 
 
-def parse_file(fn="program.yml") -> List[dict]:
+def parse_file(fn: Path) -> List[dict]:
 
     with open(fn, "rt") as yml:
         data = load(yml, Loader=Loader)

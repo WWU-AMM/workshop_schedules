@@ -23,6 +23,10 @@ updates:
           - dependency-type: all
       commit-message:
           prefix: ':arrow_up:'
+      ignore:
+          - dependency-name: actions/github-script
+            update-types:
+                - version-update:semver-major
       open-pull-requests-limit: 50
 
     - package-ecosystem: docker

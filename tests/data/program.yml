@@ -17,11 +17,10 @@ days:
                 - speaker: John Somename
                   title: Second talk
                   duration: 20min
-                  contact:
+                  contact: foo@non.none
                   description: >
-                      this is a long description
-                      with multiple lines
-                  link: https://foo.bar
+                      another talk description
+                  link:
           - pause: 30min
             description: Coffee
           - name: second session
@@ -31,9 +30,8 @@ days:
                   duration: 1h
                   contact: foo@bar.baz
                   description: >
-                      this is a long description
-                      with multiple lines
-                  link: https://foo.bar
+                      a different description
+                  link: https://nothing.bar
           - pause: 130min
             description: Lunch
 
@@ -45,17 +43,15 @@ days:
                   duration: 1h
                   contact: foo@bar.baz
                   description: >
-                      this is a long description
-                      with multiple lines
-                  link: https://foo.bar
+                      almost the last description
+                  link: https://html.bar
           - name: third session B
             parallel: true
             talks:
-                - speaker: Honored guest
-                  title: Second talk
+                - speaker: N.N.
+                  title: TBD
                   duration: 1h
                   contact: foo@bar.baz
                   description: >
-                      this is a long description
-                      with multiple lines
-                  link: https://foo.bar
+                      last description of the day
+                  link: https://theend.bar

@@ -1,3 +1,5 @@
+from typing import Optional
+
 from attr import define, field
 
 import datetime, time
@@ -9,6 +11,8 @@ from workshop_schedules.tools import duration_to_date
 class Slot:
     start: datetime.datetime
     end: datetime.datetime
+    talks: list[dict] = field(init=False, factory=list)
+    pause: Optional[dict] = field(init=False, factory=None)
 
     @property
     def duration(self) -> datetime.timedelta:
@@ -49,8 +53,16 @@ class Block:
                 end = start + duration_to_date(talk["duration"])
                 slots.append(Slot(start, end))
         if self.slots:
-            assert all(s == p for s, p in zip(slots, self.slots)), "Slots must agree for parallel sessions"
-        else:
-            self.slots = slots
-        self.end = self.slots[-1].end
+            assert all(s.start == p.start for s, p in zip(slots, self.slots)), "Slots must agree for parallel sessions"
+            assert all(s.end == p.end for s, p in zip(slots, self.slots)), "Slots must agree for parallel sessions"
         self._parallel_sessions.append(session)
+        for i, slot in enumerate(slots):
+            for sess in self._parallel_sessions:
+                try:
+                    event = sess["talks"][i]
+                    slot.talks.append(event)
+                except KeyError:
+                    assert "pause" in sess
+                    slot.pause = sess["pause"]
+        self.slots = slots
+        self.end = self.slots[-1].end

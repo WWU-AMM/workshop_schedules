@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 
 import collections
-from pprint import pprint
 import datetime, time
+from pathlib import Path
+from typing import List
+
 from yaml import load
 
 from workshop_schedules import output
@@ -14,11 +16,12 @@ except ImportError:
     from yaml import Loader, Dumper
 
 
-def parse_file(fn="program.yml"):
+def parse_file(fn="program.yml") -> List[dict]:
 
     with open(fn, "rt") as yml:
         data = load(yml, Loader=Loader)
 
+    days = []
     for day in data["days"]:
         start = time.strptime(day["start"], "%H:%M")
         day["start"] = datetime.datetime.combine(day["date"], datetime.time(start.tm_hour, start.tm_min))
@@ -34,9 +37,12 @@ def parse_file(fn="program.yml"):
                 while sessions and sessions[-1].get("parallel", False):
                     current_block.add_session(sessions.popleft())
             day["blocks"].append(current_block)
-    return day
+        day["max_parallel_sessions"] = max((bl.session_count for bl in day["blocks"]))
+        days.append(day)
+    return days
 
 
 if __name__ == "__main__":
-    day = parse_file()
-    output.render(day)
+    days = parse_file()
+    for i, day in enumerate(days):
+        output.write_day(day, filename=Path(f'day_{i+1}.html'))

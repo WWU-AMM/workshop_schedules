@@ -2,7 +2,7 @@
 
 """Tests for `workshop_schedules` package."""
 
-from click.testing import CliRunner
+from typer.testing import CliRunner
 
 from workshop_schedules import cli
 
@@ -15,10 +15,12 @@ def test_version():
 
 def test_command_line_interface():
     """Test the CLI."""
+    from workshop_schedules.cli import app
+
     runner = CliRunner()
-    result = runner.invoke(cli.main)
-    assert result.exit_code == 0
-    assert 'workshop_schedules.cli.main' in result.output
-    help_result = runner.invoke(cli.main, ['--help'])
+    result = runner.invoke(app)
+    assert result.exit_code != 0
+    assert 'Usage: workshop-schedules' in result.output
+    help_result = runner.invoke(app, ['--help'])
     assert help_result.exit_code == 0
     assert '--help  Show this message and exit.' in help_result.output

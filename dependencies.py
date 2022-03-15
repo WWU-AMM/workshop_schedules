@@ -16,6 +16,8 @@ install_requires = [
     'packaging',
     'typer',
     'humanfriendly',
+    'pyyaml',
+    'attrs',
     'jinja2',
     'rich',
 ] + setup_requires()

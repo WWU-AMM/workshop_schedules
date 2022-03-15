@@ -36,7 +36,7 @@ setup(
     description="One-liner to describe the package",
     entry_points={
         'console_scripts': [
-            'workshop_schedules=workshop_schedules.cli:main',
+            'workshop_schedules=workshop_schedules.cli:run_main',
         ],
     },
     tests_require=tests_require,

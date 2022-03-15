@@ -24,8 +24,8 @@ def version_callback(print_version: bool) -> None:
         raise typer.Exit()
 
 
-@app.command(name="")
-def main(
+@app.command()
+def workshop_schedules(
     files: List[Path] = typer.Argument(
         ...,
         exists=True,
@@ -47,5 +47,9 @@ def main(
         output.write_day(day, filename=output_dir / f'day_{i+1}.html')
 
 
+def run_main():
+    typer.run(workshop_schedules)
+
+
 if __name__ == "__main__":
-    typer.run(main)
+    run_main()

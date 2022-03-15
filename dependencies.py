@@ -15,6 +15,8 @@ def setup_requires():
 install_requires = [
     'packaging',
     'typer',
+    'humanfriendly',
+    'jinja2',
     'rich',
 ] + setup_requires()
 install_suggests = {

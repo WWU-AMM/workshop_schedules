@@ -1,0 +1,57 @@
+---
+
+days:
+    - date: 2022-12-01
+      start: 09:00
+      sessions:
+          - name: First session
+            talks:
+                - speaker: Jane Doe
+                  title: First Talk
+                  duration: 20min
+                  contact:
+                  description: >
+                      this is a long description
+                      with multiple lines
+                  link: https://foo.bar
+                - speaker: John Somename
+                  title: Second talk
+                  duration: 20min
+                  contact: foo@non.none
+                  description: >
+                      another talk description
+                  link:
+          - pause: 30min
+            description: Coffee
+          - name: second session
+            talks:
+                - speaker: Honored guest
+                  title: Second talk
+                  duration: 1h
+                  contact: foo@bar.baz
+                  description: >
+                      a different description
+                  link: https://nothing.bar
+          - pause: 130min
+            description: Lunch
+
+          - name: third session A
+            parallel: true
+            talks:
+                - speaker: Honored guest
+                  title: Second talk
+                  duration: 1h
+                  contact: foo@bar.baz
+                  description: >
+                      almost the last description
+                  link: https://html.bar
+          - name: third session B
+            parallel: true
+            talks:
+                - speaker: N.N.
+                  title: TBD
+                  duration: 1h
+                  contact: foo@bar.baz
+                  description: >
+                      last description of the day
+                  link: https://theend.bar
